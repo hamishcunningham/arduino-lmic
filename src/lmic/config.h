@@ -11,6 +11,9 @@
 //
 // You definitely should not edit this file.
 
+// TODO unless fixing https://github.com/mcci-catena/arduino-lmic/issues/714
+#define hal_init LMICHAL_init
+
 // set up preconditions, and load configuration if needed.
 #ifndef _LMIC_CONFIG_PRECONDITIONS_H_
 # include "lmic_config_preconditions.h"

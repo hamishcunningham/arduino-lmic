@@ -29,6 +29,7 @@
 #define LMIC_DR_LEGACY 0
 
 #include "lmic.h"
+#include <esp_log.h>
 
 extern const struct lmic_pinmap lmic_pins;
 
@@ -39,15 +40,20 @@ static struct {
 } OS;
 
 int os_init_ex (const void *pintable) {
+ESP_LOGW("LMIC", "os_init_ex() memset");
     memset(&OS, 0x00, sizeof(OS));
+ESP_LOGW("LMIC", "os_init_ex() hal_init_ex");
     hal_init_ex(pintable);
+ESP_LOGW("LMIC", "os_init_ex() radio_init");
     if (! radio_init())
         return 0;
+ESP_LOGW("LMIC", "os_init_ex() LMIC_init");
     LMIC_init();
     return 1;
 }
 
 void os_init() {
+ESP_LOGW("LMIC", "os_init()");
     if (os_init_ex((const void *)&lmic_pins))
         return;
     ASSERT(0);
